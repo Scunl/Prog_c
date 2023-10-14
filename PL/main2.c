@@ -34,7 +34,9 @@ int max_of_three(int a, int b, int c) {
   }
 }
 
+
 int main(int argc, char* argv[]){
-  
+  printf("\n");
+  printf("\n");
   return 0;
 }
