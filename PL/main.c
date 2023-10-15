@@ -29,8 +29,3 @@ int main(int argc, char const *argv[]) {
     printf("Nombre d'autres caractères : %d\n", Z);
     return 0;
 }
-
-
-void cube_it(int *val){
-  printf("%d", &val)
-}
