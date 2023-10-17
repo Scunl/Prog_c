@@ -1,15 +1,18 @@
 #include <stdio.h>
+#define TAILLE 5
 
-void somme(int tab[], int tab2[], int s[], int taille) {
-    for (int i = 0; i < taille; i++) {
-        s[i] = tab[i] + tab2[i];
+void somme(int tab[][TAILLE], int result[]) {
+    for (int l = 0; l < TAILLE; l++) {
+        result[l] = 0;
+    }
+
+    for (int i = 0; i < TAILLE; i++) {
+        for (int j = 0; j < TAILLE; j++) {
+            result[i] += tab[i][j];
+        }
     }
 }
 
 int main(int argc, char const *argv[]) {
-    int tab[] = {1, 2, 3, 4, 5};
-    int tab2[] = {1, 2, 3, 4, 5};
-    int s[];
-    somme(tab, tab2, s, 5);
     return 0;
 }
