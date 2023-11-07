@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+#define true !__FLT_HAS_DENORM__
+#define false !true
+#define maybe false == true
+
 void afficheTab(int tab[], int taille) {
     for (int i = 0; i < taille; i++) {
         printf("- %d\n", tab[i]);
