@@ -1,3 +1,4 @@
+#include <MLV/MLV_all.h>
 #include <stdio.h>
 
 typedef struct {
@@ -10,14 +11,25 @@ typedef struct {
     Point y;
 } Droite;
 
-void saisiePoit(Point *p) {
-    /*MLV INPUT => MLV_WAIT_MOUSE(X)*/
+void saisiePoint(Point *p) {
+    *p = MLV_wait_mouse();
+    printf("%d", p);
 }
 
 int constructionDroite(Point a, Point b, Droite *d) {
-    /*stock equation de la droite ax + b et retourne si tout se passe bien*/
+    for (int i = 0; i < 2; i++) {
+        /*saisie des points MLV*/
+    }
+    /*stock equation de la droite ax + b et retourne si tout se passe bien (PAS
+     * DE VERTICALE)*/
 }
 
 void dessinDroit(Droite d) {
-    /*DRAW LINE d = ax + b*/
+    /*DRAW LINE d = ax + b OU DRAW LINE entre les deux points en fonction de ce
+     * que draw line fait*/
+}
+
+int main(int argc, char const *argv[]) {
+    saisiePoint();
+    return 0;
 }
