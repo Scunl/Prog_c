@@ -14,13 +14,14 @@ int avanceJoueur(char plateau[], int positions[], int attente[],
                  int premier_tour) {
     int resultat_des;
     if (positions[99] == joueur_courant) {
-        return joueur_courant
+        return joueur_courant;
     } else {
-        return -1
+        return -1;
     }
     for (int i = 0, i < nb_joueur) {
         if (attente[i] == 0) {
-            resultat_des = lancer_des()
+            resultat_des = lancer_des();
+            break;
         }
     }
 }
