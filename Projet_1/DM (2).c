@@ -68,7 +68,7 @@ int avancerJoueur(char plateau[], int positions[], int attente[],
     if (attente[joueur_courant] == 0) {
         printf("\nTour du joueur %d\n", joueur_courant);
         positions[joueur_courant] += des[0] + des[1]; // Avancement du joueur
-        if (positions[joueur_courant] + des[0] + des[1] >= 100) { //
+        if (positions[joueur_courant] + des[0] + des[1] > 99) { //
             int diff = positions[joueur_courant] -
                        99; // Gestion du cas où le joueur dépasse 99
             positions[joueur_courant] = 99 - diff; //
@@ -164,7 +164,7 @@ void conversion(int pos, int *x, int *y) {
 
 void afficherPlateau(char plateau[], int positions[], int nb_joueurs) {
     int size = TAILLE / 10;
-    int tab[size + 100][size + 100];
+    int tab[size][size];
     int N = size - 1;
     int num = 0;
     int i = 0;
@@ -285,47 +285,6 @@ void simulation(JeuDeLoieParams params) {
     printf("Nombre de tours ou le jeu est bloqué = %d\n", bloque);
 }
 
-void chargement(FILE *fichier, int TAILLE_MAX) {
-    int entier[];
-    int nbjoueur;
-    int a;
-    int des[2];
-    int positions[nbjoueur];
-    int attente[nbjoueur];
-    char plateau[TAILLE];
-    bool run = true;
-
-    int tours = 0;
-    int joueur_courant = 1;
-    int premier_tour = 0;
-    int tours_joueurs = 0;
-    Plateau(plateau);
-    for (int i = 1; i <= nbjoueur;
-         i++) { // Initialisation des tableaux attente et positions
-        attente[i] = 0;
-        positions[i] = 0;
-    }
-    if (fgets(str, TAILLE_MAX, fichier) == "JO") {
-        nbjoueur = fgets(str, TAILLE_MAX, fichier);
-
-        while (fgets(str, TAILLE_MAX, fichier) != NULL) {
-            fscanf("%d %d", des[0], des[1]);
-        }
-
-        for (int i = 1; i <= nbjoueur; i++) { // Affichage du tableau attente
-            printf("attente du joueur %d: %d\n", i, attente[i]);
-        }
-        afficherPlateau(plateau, positions, nbjoueur);
-        printf("Pour chaque tour, indiquer les valeurs des deux dés ou taper "
-               "'q' pour quitter\n");
-        while (run) {
-            if (attente[joueur_courant] == 0) {
-                printf("\nJoueur %d:", joueur_courant);
-            }
-        }
-    }
-}
-
 int main(int argc, char *argv[]) {
 
     int nbjoueurs;
@@ -337,11 +296,11 @@ int main(int argc, char *argv[]) {
     bool run = true;
     JeuDeLoieParams jeuParams;
     jeuParams.seed = time(NULL);
-    if (argc > 1) {                                    //
+    if (argc > 1 &&) {                                 //
         if (strcmp(argv[1], "-W") == 0 && argc >= 4) { //
             sscanf(argv[2], "%d",
-                   &jeuParams.nombre_joueurs); // Lecture des arguments
-                                               // si l'on veut simuler
+                   &jeuParams.nombre_joueurs); // Lecture des arguments si l'on
+                                               // veut simuler
             sscanf(argv[3], "%d", &jeuParams.nombre_simulations); //
             sscanf(argv[5], "%d", &jeuParams.seed);               //
         }
@@ -352,14 +311,13 @@ int main(int argc, char *argv[]) {
         printf("Combien de joueurs ? (entre 2 et 4)\n");
         scanf("%d", &nbjoueurs);
         while (nbjoueurs < 2 || nbjoueurs > 4) {
-            printf("Veuillez indiquer un nombre de joueurs compris "
-                   "entre 2 et "
+            printf("Veuillez indiquer un nombre de joueurs compris entre 2 et "
                    "4!\n");
             scanf("%d", &nbjoueurs); // Saisie du nombre de joueurs
         }
-        fprintf(fichier, "JO\n%d\n",
-                nbjoueurs); // Ecriture du nombre nombre de joueurs dans
-                            // le fichier
+        fprintf(
+            fichier, "JO\n%d\n",
+            nbjoueurs); // Ecriture du nombre nombre de joueurs dans le fichier
 
         int positions[nbjoueurs];
         int attente[nbjoueurs];
@@ -374,8 +332,7 @@ int main(int argc, char *argv[]) {
             printf("attente du joueur %d: %d\n", i, attente[i]);
         }
         afficherPlateau(plateau, positions, nbjoueurs);
-        printf("Pour chaque tour, indiquer les valeurs des deux dés ou "
-               "taper "
+        printf("Pour chaque tour, indiquer les valeurs des deux dés ou taper "
                "'q' pour quitter\n");
         while (run) {
             if (attente[joueur_courant] == 0) {
@@ -408,8 +365,7 @@ int main(int argc, char *argv[]) {
                 }
                 while ((des[0] > 6 || des[0] < 1) ||
                        (des[1] > 6 || des[1] < 1)) {
-                    printf("Valeurs de dés invalides. Veuillez "
-                           "réessayer!\n");
+                    printf("Valeurs de dés invalides. Veuillez réessayer!\n");
                     scanf("%d %d", &des[0], &des[1]);
                 }
             }
@@ -438,8 +394,8 @@ int main(int argc, char *argv[]) {
                 printf("Coordonnées du joueur %d: x = %d, y = %d\n", i, x, y);
             }
             afficherPlateau(plateau, positions, nbjoueurs);
-            if (joueur_courant < nbjoueurs) { // Opération de changement
-                                              // du joueur courant
+            if (joueur_courant <
+                nbjoueurs) { // Opération de changement du joueur courant
                 joueur_courant++;
             } else {
                 joueur_courant = 1;

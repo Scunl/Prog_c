@@ -216,26 +216,26 @@ void afficherPlateau(char plateau[], int positions[], int nb_joueurs) {
         printf("|\n");
     }
 }
-int compterLigne(FILE *fichier) {
-    int cmp = 0;
-    int a;
-    while ((a = fgetc(fichier)) != EOF) {
-        if (a == '\n') {
-            cmp += 1;
+
+void chargement() {
+    int nbjoueurs;
+    int joueur_courant = 1;
+    int premier_tour = 0;
+    int tours_joueurs = 0;
+    int des[2];
+    FILE *fichier;
+    bool run = true;
+
+    if (fgets(str, TAILLE_MAX, fichier) == "JO") {
+        nbjoueur = fgets(str, TAILLE_MAX, fichier);
+        printf("%d\n", nbjoueurs);
+
+        while (fgets(str, TAILLE_MAX, fichier) != NULL) {
+            fscanf("%d %d", des[0], des[1]);
         }
     }
-    return cmp - 2;
 }
-int chartoint(char caractere) {
-    return caractere - '0';
-}
-int main(int argc, char *argv[]) {
-
-    char type[3]; // Pour stocker "JO"
-    char x_char;
-    int y1, y2; // Pour stocker les deux chiffres de YY
-    int x;
-    int entries_count = 0; // Compteur du nombre d'entrées lues
+int main() {
 
     int nbjoueurs;
     int joueur_courant = 1;
@@ -244,34 +244,8 @@ int main(int argc, char *argv[]) {
     int des[2];
     FILE *fichier;
     bool run = true;
-    if (argc == 2) {
-        fichier = fopen(argv[1], "r");
-        int x_values[compterLigne(fichier)];
-        int y_values[compterLigne(fichier)];
-        fscanf(fichier, "%s", type); // Lire le type (JO)
-        fscanf(fichier, "%d", &nbjoueurs);
-        while (entries_count < compterLigne(fichier) &&
-                   fscanf(fichier, " %c %d %d", &x_char, &y1, &y2) == 3 &&
-                   (x_char != '\n') ||
-               (x_char != ' ')) {
-            // Convertir le caractère 'x' en entier
-            x = x_char - '0';
 
-            // Stocker les valeurs dans les tableaux
-            x_values[entries_count] = x;
-            y_values[entries_count] = y1 * 10 + y2;
-
-            entries_count++;
-        }
-
-        printf("Valeurs lues du fichier :\n");
-        for (int i = 0; i < entries_count; i++) {
-            printf("Y Y: %d %d\n", x_values[i] % 10, y_values[i] / 10);
-        }
-
-        fclose(fichier);
-    } else
-        fichier = fopen("sauvegarde.jo", "w");
+    fichier = fopen("sauvegarde.jo", "w");
 
     printf("Combien de joueurs ? (entre 2 et 4)\n");
     scanf("%d", &nbjoueurs);
