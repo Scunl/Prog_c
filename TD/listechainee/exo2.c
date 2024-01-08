@@ -34,3 +34,5 @@ int insererTete(Liste *al, int x) {
     return 1;
 }
 
+int insereApres(Liste *al, int x, int y)
+
